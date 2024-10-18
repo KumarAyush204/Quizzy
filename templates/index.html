@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzy</title>
+    <style>
+        body {
+            background-color: #f0f4f8; /* Light background */
+            font-family: 'Arial', sans-serif;
+            color: #333;
+             margin-top: 6%;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .item-1 {
+            width: 20%;
+            text-align: right;
+            color: #0056b3; /* Change text color */
+            font-size: 300%;
+            padding: 75px;
+        }
+
+        .item-1 > p {
+            color: #ff4500; /* Change color for description */
+            font-size: 75%;
+        }
+
+        .item-2 {
+            border: 2px solid #0056b3; /* Light blue border */
+            align-items: center;
+            padding: 20px;
+            margin: 5px;
+            margin-left: 4%;
+            width: 30%;
+            text-align: center;
+            border-radius: 10px;
+            background-color: #ffffff; /* White background */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-2 > h1, h2 {
+            color: #0056b3; /* Change heading color */
+            text-align: center;
+        }
+
+        a {
+            color: #ffffff; /* White text */
+            background-color: #28a745; /* Green button */
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            width: 70%;
+            margin: 4%;
+            margin-bottom: 6%;
+            padding: 12px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #218838; /* Darker green on hover */
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .flex-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .item-1, .item-2 {
+                width: 80%; /* Full width for mobile */
+                text-align: center;
+            }
+            .item-1 {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="flex-container">
+    <div class="item-1">
+        <h1>Quizzy</h1>
+        <p>An exciting quiz app!</p>
+    </div>
+    <div class="item-2">
+        <h1>Simple Question!</h1>
+        <hr style="color: #0056b3; width: 80%;">
+        <h2>Q. Do You Want To Play Quizzes?</h2>
+        <a href="/quizes">Yes</a><br>
+        <a href="#">No</a>
+    </div>
+</div>
+</body>
+</html>

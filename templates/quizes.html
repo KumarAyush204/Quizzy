@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Quiz</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8; /* Light background */
+            color: #333;
+        }
+                nav {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        nav h2 {
+            color: #333;
+            font-size: 24px;
+            display: inline;
+            font-weight: 600;
+        }
+
+        nav a {
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 16px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #e7f0ff;
+            color: #0056b3;
+        }
+        .quiz-container {
+            border: 2px solid #0056b3; /* Light blue border */
+            width: 40%;
+            text-align: center;
+            margin: 10% auto; /* Center the container */
+            background-color: #ffffff; /* White background */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            color: #0056b3; /* Darker blue for the title */
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        hr {
+            color: #0056b3; /* Light blue line */
+            width: 80%;
+            margin: 10px auto;
+        }
+
+        .quiz-container > a {
+            color: #0056b3; /* Darker blue text for links */
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #0056b3; /* Light blue border for links */
+            border-radius: 5px;
+            margin: 10px 0;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+        }
+
+        .quiz-container > a:hover {
+            background-color: #e7f0ff; /* Light blue background on hover */
+            color: #0056b3; /* Keep text color on hover */
+        }
+
+        @media (max-width: 768px) {
+            .quiz-container {
+                width: 90%; /* Full width for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <h2>Quizes</h2>
+    <a href="/">Home</a>
+</nav>
+    <div class="quiz-container">
+        <h1>Select Quiz</h1>
+        <hr>
+        {% for quiz in quizes %}
+        <a href="/quizes/{{ quiz['quiz_id'] }}">{{ quiz['title'] }}</a>
+        {% endfor %}
+    </div>
+<script>
+    window.onpopstate = function(event) {
+        goToHome();
+    };
+
+    function goToHome() {
+        window.location.href = '/'; // Change to your quiz selection URL
+    }
+
+    // Use this to change the current history entry
+    history.pushState(null, null, window.location.href); // Prevent going back to score page
+</script>
+</body>
+</html>

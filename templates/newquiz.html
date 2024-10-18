@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Quiz</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        nav {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        nav h2 {
+            color: #333;
+            font-size: 24px;
+            display: inline;
+            font-weight: 600;
+        }
+
+        nav a {
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 16px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #e7f0ff;
+            color: #0056b3;
+        }
+
+        .container {
+            margin: 30px auto;
+            max-width: 800px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        form label {
+            display: block;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        form input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        form input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            color: #28a745;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            form input[type="text"] {
+                font-size: 14px;
+            }
+
+            form input[type="submit"] {
+                font-size: 14px;
+            }
+        }
+    </style>
+    <script>
+        function validateForm(){
+        var x = document.forms["AddQuizForm"]["title"].value;
+        var y = document.forms["AddQuizForm"]["description"].value;
+        if (x=="" || x==null){
+        alert("Please fill out title")
+        return false;
+        }
+        if (y=="" || y==null){
+        alert("Please fill out description")
+        return false;
+        }
+        }
+    </script>
+</head>
+<body>
+<nav>
+    <h2>New Quiz</h2>
+     <a href="/admin">Home</a>
+    <a href="/admin/newquiz">New Quiz</a>
+</nav>
+<div class="container">
+<form action="" name="AddQuizForm" method="post" onsubmit="return validateForm()">
+    <label>Quiz Title </label><input type="text" name="title" class="inpt"><br><br>
+    <label>Quiz Description </label><input type="text" name="description" class="inpt"><br><br>
+    <input type="submit" value="Add Quiz">
+</form>
+</div>
+<script>
+    function validateForm(){
+    let x = document.forms["AddQuizForm"]["title"].value;
+    let y = document.forms["AddQuizForm"]["description"].value;
+
+    if (x=="" || y==""){
+        alert("Please fill all fields before submitting.");
+        return false;
+    }
+    return true;
+    }
+
+</script>
+</body>
+</html>

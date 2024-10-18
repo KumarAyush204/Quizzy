@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8; /* Light background */
+            color: #333; /* Dark text color */
+        }
+
+        .quiz-container {
+            border: 2px solid #0056b3; /* Light blue border */
+            width: 50%;
+            text-align: center;
+            margin-top: 5%;
+            margin-left: auto; /* Center container */
+            margin-right: auto; /* Center container */
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #ffffff; /* White background */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            font-size: 18px;
+        }
+
+        #timer {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #0056b3; /* Timer color */
+        }
+
+        input[type="radio"] {
+            margin: 10px;
+            accent-color: #0056b3; /* Change the accent color for radio buttons */
+        }
+
+        input[type="submit"] {
+            background-color: #28a745; /* Green background for submit button */
+            color: #fff; /* White text */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        @media (max-width: 768px) {
+            .quiz-container {
+                width: 90%; /* Full width for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>{{ q_name['title'] }}</h1>
+    <form id="quizForm" action="/quizes/{{ quiz_id }}/answercheck" method="POST">
+        <div id="timer">Time remaining: 15</div>
+
+        {% for question in questions %}
+        <div class="question-block" id="question_{{ question['quiestion_id'] }}" style="display:none;">
+            <div class="question_no" style="display:inline"></div>/{{ total_question }}
+            <h3>{{ question['question_text'] }}</h3>
+
+            {% for choice in choices %}
+            {% if question.quiestion_id == choice.question_id %}
+                <input type="radio" id="1" name="{{ choice['choice_id'] }}" value="c1"> <label for="1">{{ choice['choice1'] }}</label><br>
+    <input type="radio" id="2" name="{{ choice['choice_id'] }}" value="c2"> <label for="2">{{ choice['choice2'] }}</label><br>
+    <input type="radio" id="3" name="{{ choice['choice_id'] }}" value="c3"> <label for="3">{{ choice['choice3'] }}</label><br>
+    <input type="radio" id="4" name="{{ choice['choice_id'] }}" value="c4"> <label for="4">{{ choice['choice4'] }}</label><br>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        <input type="submit" id="submitBtn" value="Submit" style="display:none;">
+    </form>
+</div>
+
+<script>
+    const questionBlocks = document.querySelectorAll('.question-block');
+    let currentQuestionIndex = 0;
+    let timeLeft = 15;
+    let timerInterval;
+
+    function displayNextQuestion() {
+        const questionNumbers = document.querySelectorAll('.question_no');
+        if (currentQuestionIndex > 0) {
+            questionBlocks[currentQuestionIndex - 1].style.display = 'none';
+        }
+        if (currentQuestionIndex < questionBlocks.length) {
+            questionNumbers[currentQuestionIndex].textContent = currentQuestionIndex + 1;
+            questionBlocks[currentQuestionIndex].style.display = 'block';
+
+            resetTimer();
+        } else {
+            document.forms["quizForm"].submit();
+        }
+    }
+
+    function resetTimer() {
+        timeLeft = 15; // Set to 15 seconds
+        document.getElementById("timer").textContent = "Time remaining: " + timeLeft;
+        clearInterval(timerInterval);
+        timerInterval = setInterval(function() {
+            timeLeft--;
+            document.getElementById("timer").textContent = "Time remaining: " + timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                currentQuestionIndex++;
+                displayNextQuestion();
+            }
+        }, 1000);
+    }
+
+    displayNextQuestion();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Score</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f7fa;
+            text-align: center;
+            color: #333;
+            margin-top: 20%;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #28a745; /* Green color for winning effect */
+        }
+        .message {
+            font-size: 1.5em;
+            color: #007bff; /* Blue color for emphasis */
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+    <script>
+    // Redirect to quiz selection when back is pressed
+    window.onpopstate = function(event) {
+        goToQuizSelection();
+    };
+
+    function goToQuizSelection() {
+        window.location.href = '/quizes'; // Change to your quiz selection URL
+    }
+
+    // Use this to change the current history entry
+    history.pushState(null, null, window.location.href); // Prevent going back to score page
+</script>
+
+
+</head>
+<body>
+    <h1>YOUR SCORE IS: {{score}}</h1>
+    <div class="message">Congratulations on completing the quiz!</div>
+    <button class="back-button" onclick="goToQuizSelection()">Back to Quiz Selection</button>
+</body>
+</html>

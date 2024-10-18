@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Quiz</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        nav {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        nav h2 {
+            color: #333;
+            font-size: 24px;
+            display: inline;
+            font-weight: 600;
+        }
+
+        nav a {
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 16px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #e7f0ff;
+            color: #0056b3;
+        }
+
+        .container {
+            margin: 30px auto;
+            max-width: 800px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+
+        a.action-button {
+            display: inline-block;
+            color: #fff;
+            background-color: #dc3545;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        a.action-button:hover {
+            background-color: #c82333;
+        }
+
+        .add-question-link {
+            display: inline-block;
+            color: #007bff;
+            background-color: #e7f0ff;
+            text-decoration: none;
+            margin: 20px 0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-question-link:hover {
+            background-color: #d0e5ff;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h3 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            nav a {
+                font-size: 14px;
+                margin-left: 10px;
+            }
+
+            .add-question-link {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h2>Edit Quiz</h2>
+     <a href="/admin">Home</a>
+</nav>
+
+<div class="container">
+    {% if len_choices %}
+
+    {% for ques in questions %}
+    <h3>{{ ques.question_text }}
+        <a href="/admin/editquiz/{{ ques.quiestion_id }}/deletequestion" class="action-button">Delete</a>
+    </h3>
+
+    {% for choi in choices %}
+    {% if ques.quiestion_id == choi.question_id %}
+    <p>{{ choi.choice1 }}</p>
+    <p>{{ choi.choice2 }}</p>
+    <p>{{ choi.choice3 }}</p>
+    <p>{{ choi.choice4 }}</p>
+    {% endif %}
+    {% endfor %}
+
+    {% endfor %}
+
+    {% else %}
+    <p>No questions found!!</p>
+    {% endif %}
+
+    <a href="/admin/editquiz/{{ quiz_id }}/addquestion" class="add-question-link">Add Question</a>
+</div>
+    <script>
+    // Redirect to quiz selection when back is pressed
+    window.onpopstate = function(event) {
+        goToHome();
+    };
+
+    function goToHome() {
+        window.location.href = '/admin/editquiz/{{ quiz_id }}'; // Change to your quiz selection URL
+    }
+
+    // Use this to change the current history entry
+    history.pushState(null, null, window.location.href); // Prevent going back to score page
+</script>
+</body>
+</html>

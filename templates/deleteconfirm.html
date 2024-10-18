@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Quiz</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        nav {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        nav h2 {
+            color: #333;
+            font-size: 24px;
+            display: inline;
+            font-weight: 600;
+        }
+
+        nav a {
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 16px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #e7f0ff;
+            color: #0056b3;
+        }
+
+        .container {
+            margin: 30px auto;
+            max-width: 800px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="radio"] {
+            margin: 0 10px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+            margin-right: 20px;
+        }
+
+        input[type="submit"] {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #c82333;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            form label {
+                font-size: 14px;
+            }
+
+            input[type="submit"] {
+                font-size: 14px;
+                padding: 10px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h2>Admin Panel</h2>
+     <a href="/admin">Home</a>
+</nav>
+
+<div class="container">
+    <h1>Are you sure you want to delete the quiz?</h1>
+    <form action="/admin/{{quiz_id}}/deletequiz" method="POST" onsubmit="return validateForm()">
+        <input type="radio" id="1" name="yes" value="c1">
+        <label for="1">YES</label>
+
+        <input type="radio" id="2" name="yes" value="c2">
+        <label for="2">NO</label><br><br>
+
+        <input type="submit" value="I Confirm">
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        const radios = document.getElementsByName('yes');
+        let isChecked = false;
+
+        for (let i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                isChecked = true;
+                break;
+            }
+        }
+
+        if (!isChecked) {
+            alert("Please select an option before submitting.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+</body>
+</html>

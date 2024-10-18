@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        nav {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        nav h2 {
+            color: #333;
+            font-size: 24px;
+            display: inline;
+            font-weight: 600;
+        }
+
+        nav a {
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 16px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #e7f0ff;
+            color: #0056b3;
+        }
+
+        .container {
+            margin: 30px auto;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container div {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .container div:last-child {
+            border-bottom: none;
+        }
+
+        h3 {
+            font-size: 22px;
+            color: #333;
+        }
+
+        p {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+
+        .action-button {
+            display: inline-block;
+            color: #fff;
+            background-color: #28a745;
+            text-decoration: none;
+            margin: 10px 10px 10px 0;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-button:hover {
+            background-color: #218838;
+        }
+
+        .action-button.delete {
+            background-color: #dc3545;
+        }
+
+        .action-button.delete:hover {
+            background-color: #c82333;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            h3 {
+                font-size: 20px;
+            }
+            p {
+                font-size: 13px;
+            }
+            nav a {
+                font-size: 14px;
+                margin-left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h2>Admin Panel</h2>
+
+    <a href="admin/newquiz">New Quiz</a>
+</nav>
+
+<div class="container">
+    {% for quizes in quiz %}
+    <div>
+        <h3>{{ quizes.title }} : {{ quizes.date_created }}</h3>
+        <p>{{ quizes.description }}</p>
+
+        <a href="/admin/editquiz/{{ quizes.quiz_id }}" class="action-button">Edit</a>
+        <a href="/admin/{{ quizes.quiz_id }}/deletequiz" class="action-button delete">Delete</a>
+    </div>
+    {% endfor %}
+</div>
+<script>
+    window.onpopstate = function(event) {
+        goToHome();
+    };
+
+    function goToHome() {
+        window.location.href = '/admin'; // Change to your quiz selection URL
+    }
+
+    // Use this to change the current history entry
+    history.pushState(null, null, window.location.href); // Prevent going back to score page
+</script>
+</body>
+</html>
